@@ -1,6 +1,6 @@
 # Reinforcement Learning Algorithms in GridWorld
 
-This repository contains lab session materials (code) for the SNU Reinforcement Learning course, 2025 Fall.
+This repository contains lab session materials (code) for the SNU Reinforcement Learning course, 2026 Spring.
 
 ---
 ## Materials
