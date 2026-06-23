@@ -4,3 +4,5 @@ __pycache__/
 *.pyc
 *.pkl
 lab_env/
+.tools/
+lab_env.backup-*/
