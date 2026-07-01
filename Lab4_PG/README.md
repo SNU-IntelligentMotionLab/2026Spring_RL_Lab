@@ -39,8 +39,8 @@ Arguments:
 - `--algo`: `reinforce`
 - `--map`: `map0`, `map1`, `map2`, or `map3`
 - `--save_name`: checkpoint suffix. Default is the selected map name.
-- `--episodes`: number of training episodes. Default is `1000`.
-- `--max-steps`: maximum steps per episode. Default is `100`.
+- `--episodes`: number of training episodes. Default is `4000`.
+- `--max-steps`: maximum steps per episode. Default is `50`.
 - `--render`: render the environment during training.
 - `--logdir`: TensorBoard log directory. Default is `runs`.
 - `--seed`: random seed. Default is `42`.
@@ -48,13 +48,13 @@ Arguments:
 Example:
 
 ```bash
-python train.py --algo reinforce --map map1 --episodes 4000 --max-steps 50
+python train.py --algo reinforce --map map1
 ```
 
 ### Testing A Trained Policy
 
 ```bash
-python test.py --algo reinforce --map {MAP_NAME}
+python test.py --algo reinforce --map {MAP_NAME} [--iter ITER]
 ```
 
 By default, checkpoints are saved as:
@@ -62,6 +62,8 @@ By default, checkpoints are saved as:
 ```text
 checkpoints/reinforce_{map}.pth
 ```
+
+Use `--iter` to choose how many evaluation episodes to render. Default is `10`.
 
 ### TensorBoard
 

@@ -163,13 +163,12 @@ class REINFORCETrainer:
 				self.writer.add_scalar('Epsilon', self.agent.epsilon, ep)
 
 			# episode rollout
-			action = self.agent.select_action(state)
 			for t in range(self.args.max_steps):
+				action = self.agent.select_action(state)
 				next_s, r, done, _ = self.env.step(action)
 				total_R += r
 				self.agent.rewards.append(r)
-				next_a = self.agent.select_action(next_s)
-				state, action = next_s, next_a
+				state = next_s
 				if self.args.render: self.env.render(tick=5000)
 				if done: break
 

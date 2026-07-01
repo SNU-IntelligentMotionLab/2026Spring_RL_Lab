@@ -6,7 +6,7 @@ TRAINER_MAP = {
     'reinforce': 'REINFORCETrainer',
 }
 
-def main():
+def build_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument('--algo', choices=list(TRAINER_MAP.keys()), required=True, help="Choose algorithm to run. Choices: [reinforce]")
     parser.add_argument('--map', type=str, default='map1', help="Map to run. Choices: [map0, map1, map2, map3]")
@@ -15,13 +15,17 @@ def main():
     parser.add_argument('--render', action='store_true')
     parser.add_argument('--logdir', type=str, default='runs')
 
-    parser.add_argument('--episodes', type=int, default=1000)
-    parser.add_argument('--max-steps', type=int, default=100)
+    parser.add_argument('--episodes', type=int, default=4000)
+    parser.add_argument('--max-steps', type=int, default=50)
     # for plotting
     parser.add_argument('--heatmap-interval', type=int, default=100)
     parser.add_argument('--resolution', type=float, default=0.1)
     # training seed
     parser.add_argument('--seed', type=int, default=42)
+    return parser
+
+def main():
+    parser = build_parser()
     args = parser.parse_args()
     if args.save_name is None:
         args.save_name = args.map
