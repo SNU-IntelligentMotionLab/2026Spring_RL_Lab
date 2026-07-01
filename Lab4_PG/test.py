@@ -1,7 +1,6 @@
 import argparse
 import importlib
 import os
-from env.gridworld_c2 import GridWorldEnv_c2
 
 # algo name mapped with agent classes
 AGENT_MAP = {
@@ -11,11 +10,15 @@ AGENT_MAP = {
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--algo', choices=list(AGENT_MAP.keys()), required=True)
-    parser.add_argument('--save_name', type=str, default='example',
-                        help="Filename of saving policy to pth file")
+    parser.add_argument('--save_name', type=str, default=None,
+                        help="Checkpoint suffix. Default is the map name.")
     parser.add_argument('--map', type=str, default='map1')
     parser.add_argument('--iter', type=int, default=10)
     args = parser.parse_args()
+    if args.save_name is None:
+        args.save_name = args.map
+
+    from env.gridworld_c2 import GridWorldEnv_c2
 
     config_path = os.path.join('configs', f'{args.map}.yaml')
 

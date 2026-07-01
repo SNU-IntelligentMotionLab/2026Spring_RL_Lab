@@ -5,14 +5,13 @@ Implemented algorithm:
 
 - **REINFORCE**
 
-The previous value-based deep RL material is split into `Lab3_DeepValueRL`
-for Deep SARSA and `Lab5_DQN` for DQN.
+The previous value-based deep RL material is in `Lab3_DeepValueRL`.
 
 ### Continuous-Action GridWorld
 
 `gridworld_c2.py` represents the agent state as a continuous `(row, col)` position.
 The action is a 2D vector in `[-1, 1]^2`, which is clamped internally by the
-environment.
+environment and scaled by the default step size of 1.0.
 
 Rewards:
 
@@ -32,14 +31,14 @@ Each map cell is one of:
 Run `train.py` with REINFORCE.
 
 ```bash
-python train.py --algo reinforce --map {MAP_NAME} --save_name {SAVE_NAME}
+python train.py --algo reinforce --map {MAP_NAME} [--episodes EPISODES] [--max-steps MAX_STEPS]
 ```
 
 Arguments:
 
 - `--algo`: `reinforce`
 - `--map`: `map0`, `map1`, `map2`, or `map3`
-- `--save_name`: checkpoint suffix. Default is `example`.
+- `--save_name`: checkpoint suffix. Default is the selected map name.
 - `--episodes`: number of training episodes. Default is `1000`.
 - `--max-steps`: maximum steps per episode. Default is `100`.
 - `--render`: render the environment during training.
@@ -49,7 +48,19 @@ Arguments:
 Example:
 
 ```bash
-python train.py --algo reinforce --map map1 --save_name example --episodes 4000 --max-steps 50
+python train.py --algo reinforce --map map1 --episodes 4000 --max-steps 50
+```
+
+### Testing A Trained Policy
+
+```bash
+python test.py --algo reinforce --map {MAP_NAME}
+```
+
+By default, checkpoints are saved as:
+
+```text
+checkpoints/reinforce_{map}.pth
 ```
 
 ### TensorBoard
@@ -72,15 +83,3 @@ Logged items include:
 - Reward curve
 - Loss
 - Continuous policy arrows
-
-### Testing A Trained Policy
-
-```bash
-python test.py --algo reinforce --map {MAP_NAME} --save_name {SAVE_NAME}
-```
-
-Checkpoints are saved as:
-
-```text
-checkpoints/reinforce_{save_name}.pth
-```

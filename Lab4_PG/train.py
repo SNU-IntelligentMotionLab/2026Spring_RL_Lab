@@ -10,8 +10,8 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--algo', choices=list(TRAINER_MAP.keys()), required=True, help="Choose algorithm to run. Choices: [reinforce]")
     parser.add_argument('--map', type=str, default='map1', help="Map to run. Choices: [map0, map1, map2, map3]")
-    parser.add_argument('--save_name', type=str, default='example',
-                        help="Filename of saving policy to pth file")
+    parser.add_argument('--save_name', type=str, default=None,
+                        help="Checkpoint suffix. Default is the map name.")
     parser.add_argument('--render', action='store_true')
     parser.add_argument('--logdir', type=str, default='runs')
 
@@ -23,6 +23,8 @@ def main():
     # training seed
     parser.add_argument('--seed', type=int, default=42)
     args = parser.parse_args()
+    if args.save_name is None:
+        args.save_name = args.map
 
     # create log dir if needed
     if not os.path.exists(args.logdir):
